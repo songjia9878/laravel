@@ -8,12 +8,23 @@ use Illuminate\Support\Facades\Auth;
 class SessionsController extends Controller
 {
     //
-
+    /**
+     * 用户登录显示
+     * @author 宋佳
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function create(){
         return view('sessions.create');
     }
 
 
+    /**
+     * 用户登录请求
+     * @author 宋佳
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function store(Request $request){
         $credentials=$this->validate($request,[
             'email' => 'required|email|max:255',
@@ -28,4 +39,17 @@ class SessionsController extends Controller
             return redirect()->back()->withInput();
         }
     }
+
+
+    /**
+     * 注销登录
+     * @author 宋佳
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function destroy(){
+        Auth::logout();
+        session()->flash('success','您已成功退出~');
+        return redirect('login');
+    }
+
 }
