@@ -31,7 +31,8 @@ class SessionsController extends Controller
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials)){
+        //根据邮箱密码查询用户是否存在
+        if(Auth::attempt($credentials,$request->has('remember'))){
             session()->flash('success','欢迎回来~');
             return redirect()->route('users.show',[Auth::user()]);
         }else{
