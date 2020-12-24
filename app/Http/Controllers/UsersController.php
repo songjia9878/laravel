@@ -8,7 +8,21 @@ use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
-    //
+    public function __construct()
+    {
+        //权限校验
+        $this->middleware('auth', [
+            //show,create,store以外的方法都要进行权限校验
+            'except' => ['show', 'create', 'store']
+        ]);
+
+        //只允许未登录情况操作的方法
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+    }
+
+
     /**
      * 用户注册显示
      * @author 宋佳
@@ -63,6 +77,8 @@ class UsersController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(User $user){
+        //权限校验
+        $this->authorize('update',$user);
         return view('users.edit',compact('user'));
     }
 
@@ -77,6 +93,8 @@ class UsersController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function update(User $user,Request $request){
+        //权限校验
+        $this->authorize('update',$user);
         $this->validate($request, [
             'name' => 'required|max:50',
             'password' => 'nullable|confirmed|min:6'

@@ -7,7 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class SessionsController extends Controller
 {
-    //
+    public function __construct()
+    {
+        //只允许未登录情况操作的方法
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+    }
+
     /**
      * 用户登录显示
      * @author 宋佳
@@ -34,7 +41,9 @@ class SessionsController extends Controller
         //根据邮箱密码查询用户是否存在
         if(Auth::attempt($credentials,$request->has('remember'))){
             session()->flash('success','欢迎回来~');
-            return redirect()->route('users.show',[Auth::user()]);
+            //重定向到上次页面，没有的话进入默认首页
+            $fallback = route('users.show', Auth::user());
+            return redirect()->intended($fallback);
         }else{
             session()->flash('danger','很抱歉，您的邮箱和密码不匹配~');
             return redirect()->back()->withInput();
