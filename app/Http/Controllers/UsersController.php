@@ -13,13 +13,24 @@ class UsersController extends Controller
         //权限校验
         $this->middleware('auth', [
             //show,create,store以外的方法都要进行权限校验
-            'except' => ['show', 'create', 'store']
+            'except' => ['show', 'create', 'store','index']
         ]);
 
         //只允许未登录情况操作的方法
         $this->middleware('guest', [
             'only' => ['create']
         ]);
+    }
+
+
+    /**
+     * 用户列表显示
+     * @author 宋佳
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function index(){
+        $users = User::paginate(6);
+        return view('users.index', compact('users'));
     }
 
 
