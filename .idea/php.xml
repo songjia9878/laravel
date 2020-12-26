@@ -108,6 +108,10 @@
       <path value="$PROJECT_DIR$/vendor/psr/http-client" />
       <path value="$PROJECT_DIR$/vendor/psr/log" />
       <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/sven/artisan-view" />
+      <path value="$PROJECT_DIR$/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/vendor/laravel-lang/lang" />
+      <path value="$PROJECT_DIR$/vendor/overtrue/laravel-lang" />
     </include_path>
   </component>
   <component name="PhpUnit">
