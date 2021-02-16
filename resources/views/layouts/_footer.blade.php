@@ -1,10 +1,9 @@
 <footer class="footer">
-    <img class="brand-icon" src="https://cdn.learnku.com/uploads/sites/KDiyAbV0hj1ytHpRTOlVpucbLebonxeX.png">
-    <a href="https://learnku.com/laravel/courses" target=_blank>
-        刻意练习，每日精进
-    </a>
+  <div class="container">
+    <p class="float-left">
+      由 <a href="http://weibo.com/u/1837553744?is_hot=1" target="_blank">Summer</a> 设计和编码 <span style="color: #e27575;font-size: 14px;">❤</span>
+    </p>
 
-    <div class="float-right">
-        <a href="{{route('about')}}" >关于</a>
-    </div>
+    <p class="float-right"><a href="mailto:name@email.com">联系我们</a></p>
+  </div>
 </footer>
